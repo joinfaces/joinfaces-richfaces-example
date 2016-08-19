@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:ra4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+<f:view contentType="text/html">
+    <h:head>
+        <title>.:: Choose your Jsf Spring Boot Starter ::.</title>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+        <h:outputStylesheet>
+            .panelc {
+                width:25%;
+            }
+
+            .valign {
+                vertical-align:top;
+            }
+
+            .dropTargetPanel {
+                width: 90%;
+            }
+
+            .footerClass {
+                text-align: center;
+                padding-top: 5px;
+            }
+
+            .rf-ind-drag {
+                font-size:11px;
+                cursor:pointer;
+                width:100px;
+                border:1px solid gray;
+                padding:2px
+            }
+
+            .rf-ind-acpt {
+                border:2px solid green
+            }
+
+            .rf-ind-rejt {
+                border:2px solid red
+            }
+        </h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>Joinfaces Richfaces example</h1>
+            <p>The examples placed below were based on the Richfaces Showcase. If you need more details about features and implementations access <a href="http://showcase.richfaces.org/" target="_blank">showcase.richfaces.org</a>.</p>
+            <rich:panel header="Select component + Ajax">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Select the type:" />
+                    <h:selectOneMenu value="#{selectsBean.currentType}" valueChangeListener="#{selectsBean.valueChanged}">
+                        <f:selectItems value="#{selectsBean.firstList}" />
+                        <ra4j:ajax event="valueChange" render="second" execute="@this" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <ra4j:outputPanel id="second" layout="block">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Select your #{selectsBean.currentType}:" />
+                        <h:selectOneMenu value="#{selectsBean.currentType}" rendered="#{not empty selectsBean.currentType}">
+                            <f:selectItems value="#{selectsBean.secondList}" />
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                </ra4j:outputPanel>
+                <hr />
+                <p>In the next example you can manually enter values, and any invalid entries are not allowed.</p>
+                <rich:panel style="width:220px;">
+                    <f:facet name="header">
+                        <h:outputText value="Select with manual input" />
+                    </f:facet>
+                    <rich:select enableManualInput="true" defaultLabel="start typing for select">
+                        <f:selectItems value="#{selectsBean.firstList}" />
+                    </rich:select>
+                </rich:panel>
+            </rich:panel>
+            <rich:panel header="Tree component">
+                <rich:tree id="tree" nodeType="#{node.type}" var="node" value="#{treeBean.rootNodes}" toggleType="client"
+                           selectionType="ajax" selectionChangeListener="#{treeBean.selectionChanged}">
+                    <rich:treeNode type="country">
+                        #{node.name}
+                    </rich:treeNode>
+                    <rich:treeNode type="company" iconExpanded="/images/tree/disc.gif" iconCollapsed="/images/tree/disc.gif">
+                        #{node.name}
+                    </rich:treeNode>
+                    <rich:treeNode type="cd" iconLeaf="/images/tree/song.gif">
+                        #{node.artist} - #{node.name} - #{node.year}
+                    </rich:treeNode>
+                </rich:tree>
+                <ra4j:outputPanel ajaxRendered="true" layout="block">
+                    <rich:panel header="Current Selection" rendered="#{not empty treeBean.currentSelection}">
+                        <h:outputText value="Name:" />
+                        <h:outputText value="#{treeBean.currentSelection.name}" />
+                        <h:panelGroup rendered="#{treeBean.currentSelection.leaf}">
+                            <fieldset>
+                                <legend>Details</legend>
+                                <h:panelGrid columnClasses="bold" columns="2">
+                                    <h:outputText value="Country:" />
+                                    <h:outputText value="#{treeBean.currentSelection.company.country}" />
+                                    <h:outputText value="Company:" />
+                                    <h:outputText value="#{treeBean.currentSelection.company}" />
+                                    <h:outputText value="Artist:" />
+                                    <h:outputText value="#{treeBean.currentSelection.artist}" />
+                                    <h:outputText value="Price:" />
+                                    <h:outputText value="#{treeBean.currentSelection.price}">
+                                        <f:convertNumber type="currency" currencyCode="USD" />
+                                    </h:outputText>
+                                    <h:outputText value="Year:" />
+                                    <h:outputText value="#{treeBean.currentSelection.year}" />
+                                </h:panelGrid>
+                            </fieldset>
+                        </h:panelGroup>
+                    </rich:panel>
+                </ra4j:outputPanel>
+            </rich:panel>
+            <rich:panel header="Panel menu component">
+                <rich:panelMenu style="width:200px" itemMode="ajax" groupMode="ajax" groupExpandedLeftIcon="triangleUp"
+                                groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="chevronUp"
+                                topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc" itemChangeListener="#{panelMenuBean.updateCurrent}">
+                    <rich:panelMenuGroup label="Group 1">
+                        <rich:panelMenuItem label="Item 1.1" name="Item_1_1" />
+                        <rich:panelMenuItem label="Item 1.2" name="Item_1_2" />
+                        <rich:panelMenuItem label="Item 1.3" name="Item_1_3" />
+                    </rich:panelMenuGroup>
+                    <rich:panelMenuGroup label="Group 2">
+                        <rich:panelMenuItem label="Item 2.1" name="Item_2_1" />
+                        <rich:panelMenuItem label="Item 2.2" name="Item_2_2" />
+                        <rich:panelMenuItem label="Item 2.3" name="Item_2_3" />
+                        <rich:panelMenuGroup label="Group 2.4">
+                            <rich:panelMenuItem label="Item 2.4.1" name="Item_2_4_1" />
+                            <rich:panelMenuItem label="Item 2.4.2" name="Item_2_4_2" />
+                            <rich:panelMenuItem label="Item 2.4.3" name="Item_2_4_3" />
+                        </rich:panelMenuGroup>
+                        <rich:panelMenuItem label="Item 2.5" name="Item_2_5" />
+                    </rich:panelMenuGroup>
+                    <rich:panelMenuGroup label="Group 3">
+                        <rich:panelMenuItem label="Item 3.1" name="Item_3_1" />
+                        <rich:panelMenuItem label="Item 3.2" name="Item_3_2" />
+                        <rich:panelMenuItem label="Item 3.3" name="Item_3_3" />
+                    </rich:panelMenuGroup>
+                </rich:panelMenu>
+                <ra4j:outputPanel ajaxRendered="true">
+                    <rich:panel rendered="#{not empty panelMenuBean.current}">
+                        <h:outputText value="#{panelMenuBean.current} selected" id="current" />
+                    </rich:panel>
+                </ra4j:outputPanel>
+            </rich:panel>
+            <rich:panel header="Drag &amp; Drop">
+                <h:panelGrid columnClasses="panelc valign, valign, valign, valign" columns="4" width="100%">
+
+                    <rich:panel style="width:133px">
+                        <f:facet name="header">
+                            <h:outputText value="Source List" />
+                        </f:facet>
+                        <h:dataTable id="src" value="#{dragDropBean.source}" var="fm" footerClass="footerClass">
+                            <h:column>
+                                <ra4j:outputPanel layout="block" styleClass="rf-ind-drag">
+                                    <rich:dragSource type="#{fm.family}" dragValue="#{fm}" />
+                                    <h:outputText value="#{fm.name}" />
+                                </ra4j:outputPanel>
+                            </h:column>
+                            <f:facet name="footer">
+                                <ra4j:commandButton action="#{dragDropBean.reset}" value="Start Over"
+                                                   render="src,phptable,cftable,dnettable" />
+                            </f:facet>
+                        </h:dataTable>
+                    </rich:panel>
+
+                    <rich:panel styleClass="dropTargetPanel">
+                        <f:facet name="header">
+                            <h:outputText value="PHP Frameworks" />
+                        </f:facet>
+                        <rich:dropTarget acceptedTypes="php" dropValue="PHP" dropListener="#{dragDropEventBean.processDrop}"
+                                         render="phptable, src" />
+
+                        <h:dataTable id="phptable" value="#{dragDropBean.targetPHP}" var="fm">
+                            <h:column>
+                                <h:outputText value="#{fm.name}" />
+                            </h:column>
+                        </h:dataTable>
+                    </rich:panel>
+
+                    <rich:panel styleClass="dropTargetPanel">
+                        <f:facet name="header">
+                            <h:outputText value=".NET Frameworks" />
+                        </f:facet>
+                        <rich:dropTarget acceptedTypes="dotNet" dropValue="DNET" dropListener="#{dragDropEventBean.processDrop}"
+                                         render="dnettable, src" />
+
+                        <h:dataTable id="dnettable" value="#{dragDropBean.targetDotNet}" var="fm">
+                            <h:column>
+                                <h:outputText value="#{fm.name}" />
+                            </h:column>
+                        </h:dataTable>
+                    </rich:panel>
+
+                    <rich:panel styleClass="dropTargetPanel">
+                        <f:facet name="header">
+                            <h:outputText value="ColdFusion Frameworks" />
+                        </f:facet>
+                        <rich:dropTarget acceptedTypes="cf" dropValue="CF" dropListener="#{dragDropEventBean.processDrop}"
+                                         render="cftable, src" />
+
+                        <h:dataTable id="cftable" value="#{dragDropBean.targetCF}" var="fm">
+                            <h:column>
+                                <h:outputText value="#{fm.name}" />
+                            </h:column>
+                        </h:dataTable>
+                    </rich:panel>
+                </h:panelGrid>
+            </rich:panel>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
