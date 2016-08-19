@@ -16,7 +16,7 @@
     <version>2.1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>JoinFaces RIchfaces Example</name>
+    <name>JoinFaces Richfaces Example</name>
     <description>Richfaces example project for Jsf Spring Boot Starter</description>
 
     <properties>
@@ -31,23 +31,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.joinfaces</groupId>
             <!-- Change artifactId to jsf-myfaces-spring-boot-starter to use MyFaces instead of Mojarra -->
             <!-- Change artifactId to jsf-jetty-spring-boot-starter to use Jetty servlet container -->
@@ -55,7 +38,6 @@
             <!-- Change artifactId to jsf-undertow-spring-boot-starter to use Undertow servlet container -->
             <!-- Change artifactId to jsf-undertow-myfaces-spring-boot-starter to use Undertow servlet container and MyFaces instead of Mojarra-->
             <artifactId>jsf-richfaces-spring-boot-starter</artifactId>
-            <version>2.1.7-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
