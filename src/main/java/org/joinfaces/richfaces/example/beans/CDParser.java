@@ -1,13 +1,9 @@
 package org.joinfaces.richfaces.example.beans;
 
-import javax.faces.FacesException;
-import javax.faces.bean.ApplicationScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
