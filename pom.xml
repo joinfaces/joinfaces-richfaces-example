@@ -7,21 +7,17 @@
     <parent>
         <groupId>org.joinfaces</groupId>
         <artifactId>joinfaces-parent</artifactId>
-        <version>3.0.0.RC1</version>
+        <version>3.0.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>org.joinfaces.examples.richfaces</groupId>
     <artifactId>joinfaces-richfaces-example</artifactId>
-    <version>2.3.6-SNAPSHOT</version>
+    <version>3.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>JoinFaces Richfaces Example</name>
     <description>Richfaces example project for Jsf Spring Boot Starter</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -31,11 +27,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>19.0</version>
         </dependency>
     </dependencies>
 
